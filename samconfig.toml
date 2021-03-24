@@ -6,7 +6,6 @@ stack_name = "serverless-rest-endpoint"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-6ge24nirg7k8"
 s3_prefix = "serverless-rest-endpoint"
 region = "us-west-2"
-profile = "personal"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
 image_repositories = ["HelloWorldFunction=084882962555.dkr.ecr.us-west-2.amazonaws.com/template-rest-endpoint"]
