@@ -1,5 +1,5 @@
-export type Greeting = `Hello ${string}`;
+import {initHandler} from './http';
+import {HelloWorldHandler} from './hello-world-handler';
+import {APIGatewayProxyHandler} from 'aws-lambda';
 
-export async function handler(): Promise<Greeting> {
-    return 'Hello World!';
-}
+export const handler: APIGatewayProxyHandler = initHandler(HelloWorldHandler);

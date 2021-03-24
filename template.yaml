@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  lambda-template
+  serverless-rest-endpoint
 
   Sample SAM Template for lambda-template
   
@@ -16,10 +16,17 @@ Resources:
     Properties:
       PackageType: Image
       ImageUri: ECR URL
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: '/hello-world'
+            Method: get
     Metadata:
       DockerTag: nodejs14.x-v1
       DockerContext: .
       Dockerfile: Dockerfile
+
 
 Outputs:
   HelloWorldFunction:
