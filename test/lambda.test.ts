@@ -1,12 +1,11 @@
 import {handler} from '../src/lambda';
-import {APIGatewayProxyHandler} from 'aws-lambda';
-import {APIGatewayProxyEvent} from 'aws-lambda/trigger/api-gateway-proxy';
+import {APIGatewayProxyEventV2, APIGatewayProxyHandlerV2} from 'aws-lambda';
 import {v4} from 'uuid';
 
 describe('handler', () => {
     it('returns the query params and path parameters`', async () => {
         const uuid = v4();
-        const params = mockHandlerParams({queryStringParameters: {'id': uuid}});
+        const params = mockHandlerParams({pathParameters: {id: uuid}});
 
         const result = await handler(...params);
 
@@ -14,12 +13,12 @@ describe('handler', () => {
     });
 });
 
-function mockHandlerParams(partial: Partial<APIGatewayProxyEvent> = {}): Parameters<APIGatewayProxyHandler> {
+function mockHandlerParams(partial: Partial<APIGatewayProxyEventV2> = {}): Parameters<APIGatewayProxyHandlerV2> {
     return [
         {...partial},
         undefined,
         undefined
-    ] as unknown as Parameters<APIGatewayProxyHandler>;
+    ] as unknown as Parameters<APIGatewayProxyHandlerV2>;
 }
 
 
