@@ -20,7 +20,7 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: '/hello-world'
+            Path: /hello-world/{id}
             Method: get
     Metadata:
       DockerTag: nodejs14.x-v1

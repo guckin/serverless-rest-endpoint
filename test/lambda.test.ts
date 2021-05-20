@@ -1,17 +1,16 @@
 import {handler} from '../src/lambda';
 import {APIGatewayProxyHandler} from 'aws-lambda';
 import {APIGatewayProxyEvent} from 'aws-lambda/trigger/api-gateway-proxy';
+import {v4} from 'uuid';
 
 describe('handler', () => {
-    it('handles the GET `/hello-world`', async () => {
-        const params = mockHandlerParams({
-            path: '/hello-world',
-            httpMethod: 'GET'
-        });
+    it('returns the query params and path parameters`', async () => {
+        const uuid = v4();
+        const params = mockHandlerParams({queryStringParameters: {'id': uuid}});
 
         const result = await handler(...params);
 
-        expect(result).toMatchObject({statusCode: 200});
+        expect(result).toEqual({statusCode: 200, body: `{"id":"${uuid}"}`});
     });
 });
 

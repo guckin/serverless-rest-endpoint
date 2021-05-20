@@ -1,5 +1,10 @@
-import {initHandler} from './http';
-import {HelloWorldHandler} from './hello-world-handler';
-import {APIGatewayProxyHandler} from 'aws-lambda';
+import {initHandler} from './http/http';
+import {NoContentHandler} from './handlers/no-content-handler';
 
-export const handler: APIGatewayProxyHandler = initHandler(HelloWorldHandler);
+export const handler = initHandler({
+    type: NoContentHandler,
+    invoke: async ({query}) => ({
+        body: {id: query.id},
+        status: 200
+    })
+});
